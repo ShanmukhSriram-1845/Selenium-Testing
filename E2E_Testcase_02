@@ -1,0 +1,30 @@
+package src;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class E2E_Testcase_02 {
+
+	public static void main(String[] args) throws InterruptedException {
+		WebDriver driver = new ChromeDriver();
+		driver.get(" https://demo.nopcommerce.com/");
+		driver.manage().window().maximize();
+		
+		String productName;
+	    String productPrice;
+		
+		driver.findElement(By.cssSelector("input.search-box-text")).sendKeys("Camera");
+        Thread.sleep(5000);
+        
+        driver.findElement(By.xpath("//button[normalize-space()='Search']")).click();
+        driver.findElement(By.linkText("Leica T Mirrorless Digital Camera")).click();
+        productName = driver.findElement(By.cssSelector("div.product-name h1")).getText();
+        productPrice = driver.findElement(By.cssSelector("span.price-value-14")).getText();
+
+        System.out.println("Product Name: " + productName);
+        System.out.println("Product Price: " + productPrice);
+        driver.findElement(By.xpath("//button[normalize-space()='Add to cart']")).click();
+        driver.findElement(By.cssSelector("shopping cart")).click();
+	}
+}
